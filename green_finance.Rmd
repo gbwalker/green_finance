@@ -1,0 +1,1235 @@
+---
+# title: "Green Finance for Chinese Overseas Investment"
+# author: "Gabriel Walker"
+output:
+ pdf_document:
+  md_extension: +raw_tex
+  latex_engine: xelatex
+  number_sections: false
+  # toc: true # Uncomment this to make it appear first.
+  # toc_depth: 2 # Overridden by the LaTeX below.
+bibliography: citations.bib
+# geometry: margin = 1.2in
+# biblio-style: plain
+link-citations: yes
+nocite: '@*'
+header-includes:
+
+# Include the cover PDF page. Make sure it's in the same directory.
+- \usepackage{pdfpages}
+
+# Rename the TOC title and set it to 2 levels deep.
+- \renewcommand{\contentsname}{TABLE OF CONTENTS}
+- \setcounter{tocdepth}{2}
+
+# For graphics.
+- \usepackage{graphicx}
+- \usepackage{incgraph}
+- \igrset{paper=current, options = {width = \paperwidth, height = \paperheight}, zerofill = 3}
+
+# A package for making text or figure callout boxes.
+- \usepackage{wrapfig}
+# \begin{wrapfigure}[# lines to use]{r/l}[overhang in margin, 34pt]{width, 5cm}
+# http://mirrors.rit.edu/CTAN/macros/latex/contrib/wrapfig/wrapfig-doc.pdf
+
+# Adjust the font size.
+- \usepackage[fontsize=12pt]{scrextend}
+
+# Suppress hyphenation.
+- \hyphenpenalty=5000
+- \exhyphenpenalty=5000
+
+# Define a custom green color.
+- \usepackage{xcolor}
+- \definecolor{green}{HTML}{4f8d8e} # used this before {487374}
+
+# Make the bullet points green.
+- \usepackage{enumitem}
+- \setlist[itemize]{label=\textcolor{green}{\textbullet}}
+
+# Set the paragraph indent and spacing.
+- \usepackage{sectsty}
+- \setlength{\parindent}{0em}
+- \setlength{\parskip}{1em}
+
+# Make a custom header.
+- \usepackage{fancyhdr}
+- \fancyhead{}
+- \rhead{\color{green}Green Finance for Chinese Overseas Investment \thepage}
+- \pagestyle{fancy}
+- \fancyfoot{} # This makes the footer blank
+
+# Make sure the footer sticks to the bottom of the page.
+- \usepackage[bottom]{footmisc}
+
+# Make the footnote numbers and line green!
+- \renewcommand\thefootnote{\textcolor{green}{\arabic{footnote}}}
+- \renewcommand\footnoterule{{\color{green}\rule{.5\linewidth}{1pt}}}
+
+# Make all sections green.
+- \sectionfont{\color{green}}
+
+# Make the line weight of fcolorbox thicker.
+- \setlength{\fboxrule}{1.2pt}
+- \setlength{\fboxsep}{5pt}
+
+### Bibliography.
+# Break the URLs in the bibliography at any point.
+- \usepackage{url}
+- \def\UrlBreaks{\do\/\do-\do_\do\%\do\.\do\[\do\]\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D\do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N\do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X\do\Y\do\Z\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9}
+
+# Display Chinese characters.
+- \usepackage{xeCJK}
+
+### Extra changes.
+# This might make the header disappear for certain pages...
+# - \usepackage{floatpag}
+# - \floatpagestyle{empty}
+
+# Make horizontal rules green?
+# - \usepackage{colortbl}
+# - \arrayrulecolor{green}
+
+# Hide page numbers
+# - \pagenumbering{gobble}
+
+# Put in an image.
+# \begin{figure}
+#  \includegraphics[width=\linewidth]{Cambodia.jpg}
+#  \caption{A boat.}
+# \end{figure}
+
+### Callout box
+# \begin{wrapfigure}[7]{r}[34pt]{5cm}
+# \fcolorbox{green}{white}{
+#  \begin{minipage}[t]{.75\linewidth}
+#   Here is some text that I want to display along the side of the document.
+#  \end{minipage}
+# }
+# \end{wrapfigure}
+---
+
+```{r initial, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+library(tidyverse)
+library(bibtex)
+library(readxl)
+library(kableExtra)
+
+bib <- read.bib("citations.bib")
+# Test: `r capture.output(print(bib["hu"]))`
+```
+
+\includepdf[page = 1]{Cover}
+
+\vspace*{\fill}
+
+\begin{center}
+This policy analysis exercise (PAE) was submitted in partial fulfillment of the requirements for the degree of Master in Public Policy (expected May 2019) on April 2, 2019. It reflects the views of the author and not those of the International Institute of Green Finance or Harvard University or any of its faculty.
+\end{center}
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\begin{center}
+Client: International Institute of Green Finance (Beijing, China)
+
+Faculty advisor: Anthony Saich, Daewoo Professor of International Affairs, John F. Kennedy School of Government, Harvard University
+
+PAE seminar leader: Dara Kay Cohen, Ford Foundation Associate Professor of Public Policy, John F. Kennedy School of Government, Harvard University
+\end{center}
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\begin{center}
+Cover image: The Sihanoukville CIIDG power station, a 405 MW coal-fired plant jointly built and operated by a Chinese multinational, in Preah Sihanouk Province, Cambodia. Imagery ©2019 CNES, via Google Earth.
+\end{center}
+
+\vspace*{\fill}
+
+\pagebreak
+
+\tableofcontents
+
+\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
+
+\pagebreak
+
+# EXECUTIVE SUMMARY
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.8\linewidth}
+  Cross-border capital flows pose a unique challenge for environmental protection that demands creative solutions. Green finance offers a range of mechanisms that can improve the environmental outcomes of Chinese investments in sensitive sectors across the globe.
+ \end{minipage}
+}
+\end{center}
+
+This report unpacks the environmental governance issues that Chinese multinational corporations encounter overseas and prescribes green finance solutions to address them. It assesses challenges in the host-country, domestic, and international contexts, and surveys the landscape of green finance to identify mechanisms relevant to overseas investment. In total it draws from more than 140 textual sources and six expert interviews.
+
+It offers five policy recommendations for Chinese institutional stakeholders:
+
+\begin{minipage}[t]{.8\linewidth}
+  \begin{itemize}
+    \item MOFCOM, CBIRC, and CSRC spearhead a BRI green bonds and credit initiative.
+    \item CBIRC launches a pilot project for mandatory overseas pollution liability insurance for sensitive industries.
+    \item Sinosure conditions its support on environmental due diligence.
+    \item PBOC promotes green ratings for Chinese multinationals.
+    \item CSRC and the Shanghai and Shenzhen Stock Exchanges mandate environmental information and CSR disclosures.
+  \end{itemize}
+\end{minipage}
+
+The report evaluates the outcomes of each recommendation for efficiency, feasibility, expedience, and sustainability. While acknowledging the limitations of green finance, it aims to chart a practical path for applying innovative tools to entrenched environmental challenges.
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# ACKNOWLEDGEMENTS
+
+I'm grateful to many for their time, guidance, and generosity:
+
+\begin{minipage}[t]{.8\linewidth}
+  \begin{itemize}
+    \item Mathias Lund Larsen, for patience and perceptive critiques, and my other hosts at IIGF
+    \item Anthony Saich, for careful comments, and Dara Kay Cohen, for sensible suggestions
+    \item The Ash Center, for institutional and financial resources
+    \item Expert interviewees, especially Kelly Sims Gallagher and Qi Qi, whose 2018 paper inspired this report
+    \item Elizabeth Economy, for pearls of wisdom, and Jennifer Holdaway, for a grounded perspective
+    \item My friends and classmates at HKS, from whom I've learned so much
+    \item Bethina Liu, and my parents, for their love and support ☺
+  \end{itemize}
+\end{minipage}
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+# ACRONYMS
+
+```{r acronyms, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+# Read in the abbreviations xlsx and print it in a table.
+
+read_excel("acronyms.xlsx") %>% 
+ kable(col.names = NULL,
+   format = "latex",
+   booktabs = T) %>% 
+ kable_styling(position = "center") %>% 
+ column_spec(2, width = "30em")
+```
+
+\pagebreak
+
+# INTRODUCTION AND METHODOLOGY
+
+## Introduction
+
+\textcolor{green}{\textbf{Why propose green finance for overseas investment?}}
+
+*Because cross-border capital flows pose a unique challenge for environmental protection that demands creative solutions.*
+
+Economic activity anywhere can generate negative environmental externalities such as air pollution, ecological degradation, and greenhouse gas emissions. But cross-border investment physically decouples a multinational corporation (MNC) from its owners and home government, so the company and regulators may have no motivation or mechanism to correct market failures. The "race to the bottom" and "pollution haven" hypotheses for market-driven MNCs also suggest that firms will shift polluting economic activity to countries with the weakest environmental protections.[^hw1]
+
+Ideally host countries seek an optimal balance between economic benefit and environmental protection. But this is often not the case in emerging economies that put a premium on growth. Most countries also lack policies to attract environmentally friendly inward investment. In order to address both local and global environmental issues, it is a crucial challenge to promote cross-border economic activity that achieves environmental objectives, or at the very least does not undermine them.[^johnson] The main difficulty lies in the fact that international economic activity involves a complicated array of actors, including host country communities, home country regulators, MNCs, and international regimes.
+
+When domestic governance fails to regulate multinational firms, when policies lack strict enforcement mechanisms, or when competitive pressures generate unwanted externalities, market tools aim to shift incentives in line with desired social outcomes. A national government may not have the authority or power to enforce its laws and will overseas, but it can foster a domestic regulatory space that shapes firms in a positive way. Green finance policies and tools have the potential to do just this.
+
+[^hw1]: @hw, 39.
+[^johnson]: @johnson, 22; 11.
+
+\textcolor{green}{\textbf{Why focus on Chinese overseas investment?}}
+
+*Because its nature and scale make it a particularly important focus for environmental protection.*
+
+First, China has a reputation for "dirty" development because of its air, water, and soil pollution at home. Scholars have noted a range of reasons that engender concern about overseas Chinese economic activity: that Chinese domestic development favors economic growth over environmental protection; that the country’s worst polluters may relocate abroad; that investment is often in environmentally sensitive sectors; and that Chinese financiers may apply low environmental standards in order to undercut competition abroad. Additionally, China’s "no-strings-attached" approach to overseas economic activity, dating from 1964, leads some scholars to criticize Chinese companies for undermining sustainable development practices.[^wz1]
+
+Second, Chinese overseas economic activity is substantial and growing. The China Export-Import Bank and China Development Bank, China’s two development finance institutions, hold 80 percent of the major assets of all multilateral development banks (MDBs).[^gallagher_2018] In 2016, their energy financing alone was \$43 billion, nearly triple that of the World Bank and all other Western development banks combined.[^johnson1] Over the coming years, with the flurry of activity surrounding Belt and Road Initiative (BRI), the activities of Chinese MNCs overseas may continue to grow. In 2017, Chinese companies contracted more than 7,000 BRI projects in fifty-nine countries, amounting to over $14 billion, nearly 90 percent of which are in energy, transport, and manufacturing infrastructure (including many hydropower and coal-fired power plant projects).[^wwf1] The BRI promises sizeable economic rewards but also risks catalyzing "catastrophic climate change."[^hilton] Finding ways to improve the environmental outcomes of Chinese overseas economic activity is a crucial task for host countries, China, and the globe.
+
+[^wz1]: @wz, 45-6.
+[^gallagher_2018]: @gallagher_2018, 2.
+[^johnson1]: @johnson, 26.
+[^wwf1]: @wwf, 5; @mofcom_bri. Although short-term contracting is distinct from long-term investment, both generate similar environmental externalities.
+[^hilton]: @hilton 
+
+## Methodology
+
+This report aims to answer the following question: 
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.75\linewidth}
+ \textcolor{green}{\textbf{Can green finance improve the environmental outcomes of Chinese overseas investments?}}
+ \end{minipage}
+}
+\end{center}
+
+I draw from more than 140 textual sources and six supplemental expert interviews to generate a set of policy recommendations for Chinese institutional stakeholders. The report includes the four main sections described below.
+
+The **Background** section defines outward foreign direct investment (OFDI), introduces the major institutional players and approval procedures for Chinese OFDI, and describes the current state of Chinese investment abroad. It also outlines the emergence of green finance in China and briefly summarizes its evolution until the present day. Readers familiar with these two domains may prefer to skip to the next section.
+
+The **Issue Identification** section adapts a three-level matrix from Hu, Wang, and Wu (2015) to identify eighteen salient themes in the environmental performance of MNCs operating abroad.[^hw2] Specifically, it focuses on environmental externalities within host countries, gaps in domestic Chinese regulations, and discrepancies between Chinese firm behaviors and international regimes. I also include an initial list of overarching issues that cut across the three areas. Johnson (2017) corroborates this approach by pointing out that greening FDI flows takes place in these three dimensions.[^johnson2]
+
+[^hw2]: “Analytical framework of OFDI’s environmental and social impacts,” in @hw, 47.
+[^johnson2]: @johnson, 31-32.
+
+The host-country portion draws from ten substantial case studies, literature reviews, and environmental impact assessments that describe ground-level environmental implications of Chinese firms operating in more than twenty-two countries.[^countries] I record every mention of specific environmental issues in the texts for a total of over one hundred references. The majority of these come from Wang and Zadek (2016), which alone synthesizes 384 papers, Friends of the Earth U.S. (2014), and Shinn (2016). The references primarily focus on power generation, extractives, manufacturing, and infrastructure. Around half mention observed issues and half mention potential issues raised based on the nature of the economic activity. Given the geographic and sectoral breadth of the cases, the references should capture the most commonly cited environmental implications of Chinese overseas investment activities.[^note1]
+
+[^countries]: Australia, Cambodia, Indonesia, Myanmar, Pakistan, Sri Lanka; Montenegro and Bosnia and Herzegovina; Peru and Ecuador; Chad, DRC, Ghana, Ethiopia, Liberia, and Mozambique, among others.
+[^note1]: The cases I reviewed primarily focus on the *negative* environmental impacts of Chinese MNCs overseas. Detailed examples of good environmental performance are often unremarkable and as a result much scarcer. The issues I identify are not inherent qualities or inevitable outcomes of Chinese investment but dominant themes from a focused selection of ground-level source material.
+
+The domestic regulation portion analyzes the scope and mandate of Chinese government policies mentioned in Gallagher and Qi (2018), Wang and Zadek (2016), and Zhu (2015).[^many1] I then identify four areas in which current OFDI policies governing the environmental performance of OFDI are insufficient. The international regime portion reviews international standards and safeguards that govern cross-border investment and treaties that China has signed. I then identify three areas in which Chinese firms and the Chinese state diverge from established practices.
+
+[^many1]: @gq, 8-9; @wz, 47-48; @zhu, 39-47.
+
+The **Green Finance Mechanisms** section explores the landscape of green finance policies and tools to identify five relevant ones for overseas investment. In particular I draw from the mechanisms highlighted in UN Environment Programme and the World Bank Group (2017), Johnson (2017), IIGF and the UN Environment Programme (2017), and PwC (2013). I introduce the relevant practices and discuss their current use within China and abroad. I also note that a variety of green finance mechanisms are not relevant in the context of Chinese overseas investments.
+
+\pagebreak
+
+The **Recommendations** section merges the identified issues and potential solutions. I propose five ways in which Chinese institutions can use green finance to improve the environmental outcomes of outbound investment and evaluate them on the following criteria:
+
+* *Efficiency*: The degree to which the outcome resolves particular problems for the costs it entails.
+* *Feasibility*: The political acceptability of the outcome to involved stakeholders.
+* *Expedience*: The timeliness of reaching the desired outcome.
+* *Sustainability*: The degree to which the outcome can persist into the future and be improved upon.
+
+I choose these criteria because of their overall *practicality*. In a perfect world, policymakers prefer outcomes that are cheap, effective, fast, and enduring. Though reality rarely delivers all four, the above criteria channel that ideal. In this section I also review some general limitations of green finance for the international context. In the Appendix I propose five alternative recommendations that fail to satisfy at least one of the criteria.
+
+*Methodological Limitations*
+
+The report attempts to do justice to the extensive literature that already exists on Chinese overseas investment and green finance. It may not, however, capture some of the more nebulous real-world institutional dynamics that would emerge through stakeholder interviews. It also largely relies on English-language source material that may portray Chinese firms as less environmentally responsible than other multinationals, as Western media often does, even though this is not always the case.[^wz2] Additionally, given the qualitative nature of the source material on Chinese overseas investment, the analysis and conclusions are subjective and not easily verifiable with quantitative methods. I have accounted for these limitations as best as possible and present my findings accordingly.
+
+[^wz2]: @wz, 4.
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# BACKGROUND
+
+## Chinese Outward Foreign Direct Investment
+
+### Definition
+
+Foreign direct investment is, according to the OECD:
+
+> Cross-border investment by a resident entity in one economy with the objective of obtaining a lasting interest in an enterprise resident in another economy.[^wz3]
+
+"Lasting interest" implies a long-term relationship between the investor and the target enterprise, including management and operation. "Direct" implies an initial capital transaction and all subsequent transactions amounting to at least 10 percent of an enterprise’s capital.[^duce] China has no standardized definition for its own OFDI. Many Chinese enterprises construct infrastructure abroad through commercial deals, contractual arrangements, or "built, own, and transfer" and "turnkey" schemes that might not satisfy the "lasting interest" criterion. As David Shinn notes, when a Chinese company declares a project an "investment," it is "exceedingly difficult to prove otherwise."[^shinn1] Popular media accounts also often conflate Chinese OFDI with aid projects, which mainly originate from special financing arrangements, namely grants, interest-free loans, and concessional loans.[^bo1] Although green finance instruments can apply to any kind of capital flow, this report attempts to focus on OFDI for which Chinese investors maintain a long-term stake in the performance of their overseas projects.[^oecd_glossary]
+
+[^wz3]: @wz, 1.
+[^duce]: @duce, 2-3.
+[^shinn1]: @shinn, 3-5.
+[^bo1]: @bo, 16.
+[^oecd_glossary]: See @oecd_glossary for more information on the technicalities of FDI.
+
+### Key Institutions
+
+*Chinese OFDI policy involves a wide range of regulatory bodies and financial institutions.*[^bo2]
+
+[^bo2]: @bo, 281-3; @gq, 6-7.
+
+* The **State Council**, chaired by Premier Li Keqiang, oversees all ministries and special commissions and establishes the "overall blueprint" for OFDI policy. It also approves large-scale foreign projects and major investments in natural resources.
+
+Ministries and ministry-level bodies:
+
+* The **People’s Bank of China** (PBOC), China’s central bank, establishes monetary policy and manages foreign exchange reserves.
+* The **Ministry of Commerce** (MOFCOM) develops policies and regulations concerning OFDI, approves certain OFDI projects, and negotiates and administers investment agreements. The Department of Outward Investment and Economic Cooperation in particular supports the overseas economic activities of Chinese firms.
+* **The National Development and Reform Commission** (NDRC) generates OFDI goals and policies; works with MOFCOM to identify industries and countries that are encouraged or prohibited for OFDI; develops measures to promote OFDI; and approves and files large-scale foreign projects and major investments in natural resources.
+* The **Ministry of Foreign Affairs** (MFA) administers China’s diplomatic principles and policies, and co-issues some policies on OFDI.
+* While the **Ministry of Ecology and Environment** (MEE), formerly the Ministry of Environmental Protection (MEP), does not specifically oversee OFDI policy, it does co-issue certain guidelines on the environmental dimensions of overseas investments.
+
+Special commissions under the State Council or PBOC:
+
+* The **China Banking and Insurance Regulatory Commission** (CBIRC), an entity established in 2018 that merged the China Banking Regulatory Commission (CBRC) and China Insurance Regulatory Commission (CIRC), approves OFDI projects by Chinese banks and oversees China’s insurance industry.
+* The **State-owned Assets Supervision and Administration Commission** (SASAC), under the PBOC, owns and supervises central state-owned enterprises.
+* The **State Administration of Foreign Exchange** (SAFE), under the PBOC, develops foreign exchange policies, oversees the outflow of foreign exchange, and manages China’s foreign exchange reserves.
+
+Other major financial institutions include two policy banks and a number of state-owned commercial banks:
+
+* **China Development Bank** (CDB) has funded China’s "going global" strategy since the late 2000s through investments in infrastructure, industry, agriculture, and housing, and has registered capital of nearly $63 billion and assets over $2.3 trillion. It operates in 115 countries and is the world’s largest development finance institution.[^cdb1] 
+* **China Export-Import Bank** (Exim) provides financing for Chinese OFDI and plays a central role in implementing the "going global" strategy and BRI.[^intro] In 2017 the bank provided services that covered 90 countries, issued $37 billion in overseas investment loans, and had assets of $540 billion.[^exim]
+* Five **state-owned commercial banks** (Industrial and Commercial Bank of China, Bank of China, China Construction Bank, Agricultural Bank of China, and Bank of Communications) hold nearly half of the banking sector’s assets and lend to a wide range of industries.[^pwc1]
+* More recent institutions such as the **Asian Infrastructure Investment Bank** (AIIB) and **New Development Bank** (NDB), of which China is a founding member, and the **Silk Road Fund** (SRF), a Chinese-owned investment fund, also provide development finance for Chinese OFDI, particularly for BRI projects.[^cciee1]
+
+[^cdb1]: @cdb_about; @cdb_coop
+[^intro]: @exim_intro 
+[^exim]: @exim 
+[^pwc1]: @pwc, 21.
+[^cciee1]: @cciee, 69.
+
+### OFDI Approval Process
+
+The approval process for a Chinese enterprise to invest abroad has dramatically simplified over the past five years.[^gq1] Today, around 98 percent of overseas investments require only filing with MOFCOM (or the local provincial counterpart) and not prior approval.[^mofcom1] After filing, firms must register their foreign transactions with a SAFE- and CBIRC-qualified bank. Investments in "sensitive" sectors or countries require approval from MOFCOM and NDRC, and sensitive investments over $2 billion must receive State Council approval. MOFCOM and NDRC’s definitions for "sensitive" differ, but together include countries without diplomatic relations with China, under international sanctions, or engaged in wars; sectors with export restrictions in China; and projects involving telecoms, large-scale land development, cross-border water resources, and power grids, among others. Certain "encouraged" investments include BRI projects, high-quality industry and manufacturing, extractive energy resources, and agriculture. Investments involving banned exports or core and military technologies are "prohibited."[^ndrc1] In January 2018, MOFCOM and four other departments announced a new plan to share OFDI information and conduct ex-post monitoring of investments to guarantee the authenticity and completeness of filings. SOEs in particular are also required to obtain SASAC approval for any OFDI involving sectors on a "negative" list.[^gq2]
+
+[^gq1]: @gq, 8.
+[^mofcom1]: @mofcom_2014 
+[^ndrc1]: @ndrc_2017 
+[^gq2]: @gq, 8-11; @zhu, 11-16.
+
+### Growth of Chinese OFDI
+
+China’s OFDI has increased dramatically over the past fifteen years, putting it in the top three annual global investors alongside the United States and Japan. OFDI flows reached a peak of nearly \$200 billion in 2016 and dropped to \$160 billion in 2017, likely because of capital outflow restrictions on low-value and "irrational" investments.[^eiu] Nonfinancial investments held steady at around \$120 billion during both 2017 and 2018.[^reuters] The majority of OFDI in 2017 went to Hong Kong (around 75 percent), the British Virgin Islands, and Switzerland, but a number of developing countries were top recipients of investment as well such as Kazakhstan, Malaysia, Indonesia, Laos, and Pakistan.[^mofcom2] Some investments to Hong Kong "round trip" and reenter Mainland China, which effectively reduces the total amount of OFDI but likely not to developing economies.[^gh]
+
+[^eiu]: @mofcom_ofdi, 87; @eiu, 8.
+[^reuters]: @reuters 
+[^mofcom2]: @mofcom_ofdi, 98.
+[^gh]: @gh, 2.
+
+Chinese OFDI stock in 2017 covered 189 countries and amounted to \$1.8 trillion, second only to that of the United States. That year Chinese overseas mergers and acquisitions occurred in fifty-six countries, particularly in manufacturing (over 50 percent of the total), mining, and power generation and water provision. Top sectors for OFDI stock include mining, manufacturing, transportation, construction, electricity production, and agriculture, amounting to around \$430 billion. Among the top ten nonfinancial MNCs by OFDI stock are China National Petroleum Corporation, China National Offshore Oil Corporation, China Petrochemical Corporation, and China Resources (Holdings) Co.[^mofcom3]
+
+[^mofcom3]: @mofcom_ofdi, 86, 91, 103, 110, and 155.
+
+Financial support for the BRI has grown in recent years even as total OFDI has dropped or remained constant. In 2017 the Chinese government pledged $113 billion toward special funds for the BRI, and in 2018 investment in BRI countries grew 9 percent.[^zhou1] But domestic fiscal pressures may significantly limit the overall investment that BRI catalyzes.[^pei] External concerns, such as security issues and host-country debt sustainability, could also significantly reduce the scale of BRI-driven overseas investments.[^ramachandran]
+
+[^zhou1]: @zhou, 2; @reuters.
+[^pei]: @pei 
+[^ramachandran]: @ramachandran; @hurley, 2.
+
+## Chinese Green Finance
+
+### Definition
+
+“Green finance,” according to one broad definition, is “financing of investments that provide environmental benefits in the broader context of environmentally sustainable development.”[^eib] Another more specific characterization is:
+
+> Financial products and services, under the consideration of environmental factors throughout the lending decision making, ex-post monitoring, and risk management processes, provided to promote environmentally responsible investments and stimulate low-carbon technologies, projects, industries, and businesses.[^pwc2]
+
+The OECD’s definition also includes “sustainable management of natural resources and the services [those resources] provide.”[^johnson3] Precisely defining the word “green” is a divisive issue, but the ultimate goal of all green finance is to increase capital allocation toward environmentally friendly ends.[^note2]
+
+[^eib]: @eib, 7; Also see the conceptual definition in @kahlenborn, 91.
+[^pwc2]: @pwc, 15.
+[^johnson3]: @johnson, 13.
+[^note2]: “Green finance” also differs from “sustainable finance” in that the latter explicitly involves social, economic, and governance issues (@kahlenborn, 21).
+
+### Policy Evolution
+
+The first Chinese government policy that could be considered relating to “green finance” is the PBOC’s 1995 *Notice on Credit Policy for Environmental Protection*. Over the following fifteen years, the PBOC, State Environmental Protection Agency (now MEE), and CBRC (now CBIRC) published other policies relating to credit and environmental information-sharing for banks and enterprises.[^pwc3] In 2007 the CBRC released the first significant contemporary green finance policy, the *Green Credit Guidelines*, to encourage banks to promote environmental objectives and consider the environmental risks of their lending practices.[^notice] In November 2013, the Third Plenum of the Eighteenth Party Congress stressed that “efforts must be made to establish a market-based mechanism that channels private capital investments to the protection of eco-environment,” enshrining the importance of green finance at the highest level of government. The Green Finance Task Force, an outgrowth of the Research Bureau of the PBOC that first convened in 2014, later proposed a range of green finance topics and tools for further study, including bonds, insurance, IPOs, information disclosure, and investor networks.[^pboc1] It also put forth six central goals aimed at defining China’s green financial system in the years to follow:
+
+* Promote measures both to restrict polluting investments and to promote green investments;
+* Consider establishing specialized lending institutions;
+* Rely on fiscal and financial means, not administrative measures;
+* Provide an array of financial products, not just credit;
+* Leverage institutional change to incentivize financial institutions;
+* Support green investment in principle and with the necessary financial infrastructure.[^pboc2] 
+
+[^pwc3]: @pwc, 23-4.
+[^notice]: @cbrc_notice; @ifc_support 
+[^pboc1]: @pboc_unep, xi.
+[^pboc2]: @pboc_unep, xiii.
+
+Since 2014, the Task Force evolved into a permanent Green Finance Committee under the China Society of Finance and Banking that helped to spearhead the Green Finance Study Group at the 2016 G20 meeting in Hangzhou.[^iisd] Directly preceding the G20 meeting, the State Council approved the *Guidelines for Establishing the Green Financial System*, a keystone document that laid out nine agenda items for Chinese green finance, including developing green lending and insurance, enhancing the role of securities markets for green investment, launching green funds, and reducing financial risks.[^pboc3] Policies on green bonds in particular have been comprehensive, first with the PBOC’s *Green Bond Endorsed Project Catalogue* and the NDRC’s issuance guidelines from 2015, and the PBOC and China Securities Regulatory Commission’s (CSRC’s) *Green Bond Assessment and Verification Guidelines* from 2017.[^ndrc2] The green bond market in China has grown in stride to the largest in the world, with nearly $43 billion issued in 2018.[^cbi1]
+
+[^iisd]: @halle 
+[^pboc3]: @pboc_guidelines 
+[^ndrc2]: @ndrc_2015; @pboc_2015; @british, 1.
+[^cbi1]: @meng, 3.
+
+Other types of green finance already or soon to be implemented in China include credit, development funds, emissions trading schemes, compulsory pollution insurance, green finance pilot zones, and mandatory environmental disclosure, among others.[^gilbert] The primary focus of much of these measures is on reducing pollution and catalyzing low-carbon development within the domestic Chinese context.
+
+[^gilbert]: @gilbert, 10-15; @chen_2018; @ecns; @unep, 90.
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# ISSUE IDENTIFICATION
+
+## Overarching Themes
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 1: Perception that Chinese firms export “dirty” development.
+   \item 2: Chinese firms lack experience operating overseas.
+   \item 3: Chinese firms invest without regard to governance.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Academics have voiced a wide array of concerns about environmental issues associated with Chinese overseas investment. A common one is that Chinese MNCs export a “dirty” model of economic development. Because Chinese domestic policy in the recent past put a greater emphasis on economic development than environmental protection, some researchers write, Chinese firms will follow that logic overseas. With the more recent focus on shoring up domestic environmental policies, there is also concern that the “worst” Chinese polluters will be forced to move abroad.[^wz4] Chinese MNCs are also relatively new players in overseas markets, since the “going out” policy only officially began in the early 2000s. Firms may underestimate the risks associated with some projects or investment destinations, or lack the experience to follow domestic regulations or environmental best practices.[^dollar1] David Dollar finds that Chinese OFDI in particular is uncorrelated with an index of property rights and the rule of law. For other countries, on average, OFDI is “strongly attracted” to destinations with stronger governance.[^dollar2] Because the environmental outcomes of investments often depend on host country laws and regulations, weak governance in general may correspond to weak environmental governance in particular.
+
+[^wz4]: @wz, 46.
+[^dollar1]: @dollar, 7; @zhu, 30.
+[^dollar2]: @dollar, 6.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 4: Chinese OFDI goes to environmentally sensitive sectors.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Another set of concerns focuses on the target sectors of Chinese OFDI. One survey of 543 Chinese firms operating in BRI countries found that 75 percent were involved in secondary industry such as mining, manufacturing, power generation, and construction.[^unep] Because these sectors can cause serious local environmental impacts, including water depletion, air pollution, and ecological damage, outside observers perceive that a large portion of Chinese OFDI goes toward environmentally sensitive activities.[^wz5] Because infrastructure projects in particular can differ wildly in operating efficiencies between countries, the potential for unintended outcomes in infrastructure is high.[^cciee2] Overall, Chinese investments compound environmental risks because of their sensitive sectoral mix and frequent use of previously inaccessible resources.[^wz6]
+
+[^unep]: @unep, 52.
+[^wz5]: @wz, 31.
+[^cciee2]: @cciee, 79.
+[^wz6]: @wz, 34.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 5: Chinese OFDI goes toward high-carbon development and, excluding hydropower, lags behind in renewables.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+A parallel concern is that Chinese investments, particularly in energy, skew toward high-carbon development. A recent study found that “most Chinese deals in energy and transportation are still tied to traditional sectors and do not show a strong alignment with the low-carbon priorities” of BRI countries. Furthermore, during 2014–2017, 95 percent of cross-border energy investments of SOEs were in fossil fuels.[^zhou2] Another study determined that the more than fifty Chinese-financed overseas coal-fired power plants built between 2001 and 2016 would release around 600 million metric tons of CO$_2$ per year, equivalent to more than 10 percent of U.S. emissions in 2015.[^gq3] Despite China’s concurrent amount of overseas renewable energy investment, primarily from private enterprises, SOE-driven overseas coal investment undercuts low-carbon development goals. During 2000–2017, Chinese overseas renewable investments, excluding hydropower, accounted for only 13 percent of all energy investment abroad. So there is enormous potential for Chinese investment to reorient toward renewable investment, especially to help fulfill BRI countries’ nationally determined contributions under the Paris Agreement, in the coming years.[^cabre]
+
+[^zhou2]: @zhou, 3.
+[^gq3]: @gq, 3.
+[^cabre]: @cabre, 45.
+
+*Chinese investment can have substantial value, too.*
+
+It is important to note at least one caveat about these broad critiques of Chinese OFDI. Many studies find that Chinese investments in critical infrastructure, particularly transportation and energy projects in developing countries, provide substantial value to local residents. Especially in parts of Africa, where the lack of essential infrastructure is a barrier to inter-state economic integration, Chinese investment can connect stranded markets. Investments in other industries such as raw materials processing, mining, and energy also involve some positive spillover effects from necessary infrastructure development. Other research has shown the value of Chinese investment for host-country macroeconomic development, including fostering trade, accelerating industrialization, and rejuvenating defunct industries.[^wz7] There are numerous examples of Chinese companies engaging in overseas CSR activities such as community development, education, disaster relief, and biodiversity protection initiatives.[^wz8] While this report focuses on the negative environmental externalities of Chinese investments, it is important to remember that the environmental side effects are an unintended consequence of often beneficial economic activity.
+
+[^wz7]: @wz, 11-14.
+[^wz8]: @wz, 28-29; @hw, 33.
+
+## Host Country Issues
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 6: Chinese MNCs operate in host countries that have a limited ability or willingness to address environmental concerns.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Local governments may lack the capacity or willingness to intervene in economic activity when environmental issues are at stake. Many host country governments, especially those in developing countries, focus primarily on economic development or lack the political will or regulatory framework to address environmental concerns.[^hw3] Shinn points out that host countries may avoid confronting foreign firms out of concern of discouraging other investment. And even when a host government has a robust environmental legal framework to intervene, which is not always the case, it may lack the capacity to do so.[^shinn2]
+
+[^hw3]: @hw, 51-2.
+[^shinn2]: @shinn, 17, 20.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 7: Chinese firms focus on government, not civil, engagement.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+The stakeholder engagement process of Chinese MNCs often mirrors what firms do within the domestic Chinese context, liaising with top-level governments instead of local communities. Firms do a thorough job of meeting with central and local governments but fail to work with local civil society organizations and the general public. A “government-only” approach, especially in politically unstable countries, can deepen misunderstandings and intensify conflicts.[^zhu1] Infrastructure projects may be particularly at risk for this kind of instability because national governments plan them in “departmental silos” without including stakeholder views and necessary environmental design requirements.[^wwf2]
+
+[^zhu1]: @zhu_2016, 83.
+[^wwf2]: @wwf, 12.
+
+*Issues 8–11 derive from the ten case documents described in the Methodology section and listed in the Appendix.*
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 8: The environmental performance of Chinese investments has a crucial social component.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+A majority of the cases highlighted the impacts of investments on human lives and livelihoods. That is, the environmental consequences of economic activity were most visible and urgent when they collided with local communities and populations. Some observed issues with a social component included protests over pollution and biodiversity loss, worsening food insecurity, population displacement, and forest and farmland destruction. Potential issues included crop damage, groundwater depletion, threats to aboriginal heritage, and reduced agricultural labor availability. Although these issues may fundamentally stem from environmental disturbances, their human component amplifies their perceived and real deleterious effects.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 9: Extractive, hydropower, and infrastructure projects often have serious ecological consequences.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Nearly a quarter of the case references related to impacts on local ecosystems and wildlife. Observed issues included destructive prospecting tactics, habitat disruption, food chain disturbances, and unsustainable logging practices. Potential issues included habitat disruption for both flora and fauna, a decline in endangered species populations, and disturbances in migration patterns. These issues were most often associated with extractive industries (oil and gas, mining, and logging), hydropower development, and road building.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 10: Environmental issues cause ripple effects for host-country stakeholders that threaten future investments.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Some investments, because of legal discrepancies or insufficient environmental impact assessments (EIAs), caused unrest that required government intervention. Others attracted high-profile media reports about their environmental violations. These events likely caused reputational ripple effects that could magnify negative perceptions about certain types of projects or Chinese investors in general. Though these issues are not the direct result of economic activity, they are consequences of environmental issues that generate conflicts with host-country  stakeholders that can jeopardize future foreign investments in the country.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 11: Waste emissions that pollute local water and air are a frequently reported consequence of industrial activity.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+The case references reported that Chinese industrial projects produced many kinds of unwanted emissions. This included noise, “toxic waste,” construction refuse, cyanide and mercury from mining, and produced water from hydrocarbon extraction. Water contamination (and overuse) and air pollution, from construction, coal dust, and diesel emissions were prominent subcategories. The references rarely mentioned climate impacts or greenhouse gas emissions. This is not especially surprising because the case studies focused on local environmental impacts and not global implications.
+
+\pagebreak
+
+## Domestic Regulatory Issues
+
+China’s regulatory framework plays an important role in governing how Chinese MNCs operate overseas. The presence or lack of proper incentives and disincentives directly influences the environmental performance of firms and their projects. A selection of four key policies that relate to OFDI environmental governance is provided below. See the Appendix for a more complete summary of sixteen policies and relevant documents.[^note3]
+
+[^note3]: The environmental policies of CDB and Exim are discussed in the following section, since they are often compared to those of other MDBs.
+
+* The 2018 ***Interim Measures for Reporting of Outbound Investments Subject to Record-Filing or Approval*** (MOFCOM and others) stresses negative investment lists, random inspections, and regular reporting and supervision. Although it does not mention environmental issues explicitly, any serious incidents that a firm were involved in overseas would likely be subject to warnings or reminders of some sort.[^interim2]
+* The 2017 ***Further Guidelines on the Monitoring and Supervision of Outbound Direct Investment*** (NDRC and others), lays out “encouraged,” “restricted,” and “prohibited” categories for OFDI. Investments that use “backward” equipment or fail to meet the environmental or energy consumption standards of a country are restricted but not prohibited.[^ndrc3]
+* The 2017 ***Environmental Risk Management Initiative for China’s Overseas Investment*** (Green Finance Committee of the China Society for Finance and Banking and others) encourages banks and firms to adopt responsible investment principles abroad. The publishers also commit to building capacity in these areas, such as offering training programs, developing risk management manuals, and launching a website for BRI environmental risk management.[^risk1]
+* The 2017 ***Belt and Road Ecological and Environmental Cooperation Plan*** (MEP) states that “green development” and “eco-environmental protection” are components of BRI’s guiding ideology. It aims to promote cooperation in green sectors, apply green financial instruments to investments, encourage enterprises to play a “major role” in environmental governance, and advance low-carbon infrastructure, among other goals.[^bri1] 
+
+[^interim2]: @mofcom_temp_2018 
+[^ndrc3]: @ndrc_2017 
+[^risk1]: @gfc, 2-6.
+[^bri1]: @mep 
+
+*Current Chinese frameworks are insufficient in at least four dimensions to effectively improve the environmental outcomes of overseas investments.*
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 12: Environmental guidelines for OFDI are mostly elective and aspirational.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+The 2017 *Guidelines*, 2017 *Risk Management Initiative*, and BRI plans are exhortatory rather than compulsory, aspirational rather than vital. They represent official will and the ambitions of certain institutional stakeholders but lack “coercive power” to compel compliance.[^forests] This top-down approach is characteristic of Chinese law-making in general and facilitates long-term planning and delegation, but does not demand any real change in firm decision making.
+
+[^forests]: @cook, 46.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 13: OFDI policies lack enforcement mechanisms.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+On paper, the worst consequence of violating a policy is the possible loss of a business license. A more detailed definition of punishments does not seem to be available, and to date no enterprises have been publicly reported for poor environmental performance overseas.[^gq4] The “bad credit” system too is nontransparent and nonthreatening. In 2018, for example, MOFCOM rated 91 percent of central SOEs as “outstanding” for foreign investment, and the other 9 percent “good,” mainly because of incomplete or tardy statistical reporting, not because of any record of unsatisfactory performance.[^stats] Furthermore, while companies may be liable for their environmental records, Chinese banks have no legal liability for the environmental performance of their investments.
+
+[^gq4]: @gq, 10.
+[^stats]: @mofcom_stats_2018, 2.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 14: OFDI policies do not match Chinese MNCs realistic capacity to follow them.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Many Chinese companies may be aware and interested in promoting environmental objectives but lack the capacity and experience to know how to do so effectively.[^many2] This applies in particular to following host-country regulations, conducting EIAs, and liaising with local community stakeholders. According to a report on the CSR practices of Chinese firms overseas, over three-quarters were classified as “bystanders” or “starters,” with most failing to incorporate social responsibility into daily operations. Notably, the CSR ratings of central SOEs were on average twice as high as those of private enterprises (and five times higher than for other SOEs), possibly because central SOEs have the most extensive experience operating abroad.[^csr2] Another corroborating survey found that number of years operating abroad corresponded with a greater familiarity with local environmental laws.[^caitec1] Though OFDI policies and prescriptions encourage host-country legal compliance and environmental best practices, firms may not have the capability to follow through on expectations.
+
+[^many2]: @dunn, 43; @hw, 45; @zhu, 83; @wz, 44.
+[^csr2]: @csr, 245-6.
+[^caitec1]: @caitec, 88.
+
+\pagebreak
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 15: OFDI policies emphasize information centralization, not transparency.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+The 2018 *Measures* emphasize joint supervision between government agencies. This approach may help to reinforce a more comprehensive oversight system for overseas investors within the Chinese government, but it fails to take advantage of the powerful supervisory effect that transparency offers. There is no information exchange mechanism, for example, between Chinese entities and host country governments to facilitate regulation.[^zhu2] Neither party has access to public information that could corroborate data that the other government collects, so there is room for misrepresentation and miscommunication. Additionally, Chinese institutions such as MOFCOM, NDRC, and PBOC may lack the capacity to fully and expertly vet the activities of every firm operating abroad. Private information collection does not allow consumers, NGOs, and expert watchdogs within China and in host countries to demand responsible environmental practices from firms.
+
+[^zhu2]: @zhu, 29.
+
+## International Regime Issues
+
+When Chinese MNCs invest in a host country, they also operate in the context of international regimes. This third space comes with its own frameworks, treaties, and expectations that aim to govern and regulate environmental performance where nation-states lack authority. How the activities of firms align with or diverge from these international practices, some of which are described in the Appendix, is another source of issues surrounding Chinese overseas investment.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 16: BRI projects and other overseas investments may be incompatible with international treaties on biodiversity and climate change.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+According to the 2017 *Further Guidelines*, foreign investments that contravene international treaties that China has signed are prohibited.[^ndrc4] This includes the Convention on Biological Diversity (CBD), Paris Agreement, Kyoto Protocol, and Convention on International Trade in Endangered Species.[^note4] CBD states that contracting parties should “promote the protection of ecosystems, natural habitats, and the maintenance of viable populations of species in natural surroundings” as far as is possible and appropriate.[^cbd] But some researchers point out that the BRI crosses several terrestrial and marine biodiversity hotspots and could have “disastrous consequences for biodiversity.”[^bio] Under the Paris Agreement, China has also committed to peak its carbon emissions by 2030 and reduce its carbon intensity by around 60 percent (of 2005 levels) by the same year.[^cat] Chinese financial institutions, however, are currently funding more than fifty coal-fired power plants abroad, the majority of which are subcritical, which over a thirty-year period will release more CO2 than the U.S. and China do in a year. And even supercritical plants, which make up nearly all of the other projects, may only reduce the lifetime CO$_2$ emissions of the plants by less than 20 percent.[^ghg] It may be impossible to prove that the BRI and other Chinese overseas investments explicitly contravene the CBD and Paris Agreement, but they may still be incompatible with the spirit of the treaties.
+
+[^ndrc4]: @ndrc_2017 
+[^note4]: China is a signatory to but technically exempt from the Kyoto Protocol.
+[^cbd]: @un, 8.
+[^bio]: @lechner, 2.
+[^cat]: @cat 
+[^ghg]: @whitaker, 10-11. Assuming the median values for subcritical and supercritical plants, holding total generation time and output constant.
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 17: Elective transparency initiatives for firms are uneven or ineffective for overseas operations.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+As of early 2019, 264 Chinese companies are signatories of the UN Global Compact, a voluntary initiative based on CEO commitments and annual filings to implement sustainable business practices. Three of the Global Compact’s ten CSR principles relate to environmental responsibility. Chinese members include ninety-three firms in industrial and chemical production, twenty primary-sector enterprises in “basic resources” and petroleum, and nearly twenty finance and investment firms and banks. Many are some of China’s largest overseas investors such as China National Offshore Oil Corp., Sinopec, China Minmetals, Sinochem, and China Railway Construction Corp, among others.[^compact] There are also some examples of Chinese companies operating in developing countries working with the Extractive Industries Transparency Initiative (but only in “rare cases”) and the ISO 14000 environmental management standards.[^wz9] Additionally, the Shenzhen and Shanghai Stock Exchanges published CSR disclosure guidelines for listed companies in 2006 and 2008, respectively, both of which encourage firms to include environmental performance in annual sustainability reports.[^bo3] Despite these initiatives, only 10 percent of Chinese MNCs surveyed in 2015 released CSR reports related to their overseas operations, while 50 percent released no information at all.[^caitec2] And still a quarter of all negative reports about the CSR performance of Chinese firms overseas involved environmental impact.[^csr3] Either because of under-coverage (i.e., too few firms participate) or because of ineffectiveness (i.e., elective standards are not demanding enough), transparency initiatives aligned with international best practices may not necessarily translate to broad improvements in environmental outcomes for OFDI.
+
+[^compact]: @ungc 
+[^wz9]: @wz, 39, 53.
+[^bo3]: @bo, 170, 178.
+[^caitec2]: @caitec, 63.
+[^csr3]: @csr, 257.
+
+\pagebreak
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 18: Chinese financial institutions subscribe to limited international benchmarks for ESG best practices, and CDB and Exim fall short of leading MDBs.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+The highest-profile international ESG standard for the financial sector is the Equator Principles (EPs), an elective risk-management framework that requires financial institutions to assess and manage environmental and social factors when financing projects. To date EP institutions provide more than 90 percent of global project finance, but only two Chinese institutions, the Industrial Bank and Bank of Jiangsu, have yet signed on.[^pboc4] This is possibly because Chinese banks have their own established CSR practices already, or are not interested in the additional disclosure requirements for an external organization. Although CDB launched a working group to explore the possibility of adopting the EPs in 2008, nothing has since come of it.[^wz10] In 2007 CBRC issued *Opinions on Consolidating the Corporate Social Responsibilities of the Banking Industry and Financial Institutions*, which required large banks to abide by the UN Global Compact’s ten CSR principles, and in 2008 the China Banking Association published *Guidelines on Corporate Social Responsibility of Financial Institutions*, which included an aspirational chapter on environmental responsibility.[^wz11] But as with enterprises, the vast majority of banks do not include the ESG performance of their overseas assets in regular CSR reports. Two additional international practices that Chinese entities have not yet adopted include ESG-dependent overseas investment insurance, such as with the U.S. Overseas Private Investment Corporation’s “Development Matrix” scoring tool, and lender environmental liability, such as the U.S. *Comprehensive Environmental Response, Compensation, and Liability Act*.[^pboc5]
+
+[^pboc4]: @pboc_unep, 9; @ep_members.
+[^wz10]: @wz, 51.
+[^wz11]: @wz, 46; @bo, 182.
+[^pboc5]: @johnson, 25; @pboc_unep, 34.
+
+*Another important dimension is how the practices of CDB and Exim, China’s primary funders of overseas projects, align with those of other MDBs.*
+
+The World Bank’s procedures for environmental and social safeguards, at least for infrastructure projects, have historically been considered the international “gold standard.” The Bank also launched a new Environmental and Social Framework in October 2018 that applies to all of its investment financing.[^wb] In the past, however, the World Bank’s rigor has come with added bureaucratic and monetary costs that often makes Chinese financing more appealing to developing countries.[^dollar] The IFC’s 2006 *Performance Standards on Environmental and Social Sustainability* have also had a “profound influence” on the ESG practices of international financial institutions.[^ren] Compared to these two institutions, CDB and Exim fall short in a few respects:
+
+[^wb]: @wb_esf 
+[^dollar]: @dollar, 11.
+[^ren]: @ren, 11-12.
+
+\pagebreak
+
+* They lack specialized departments for environmental and social review;
+* Their pre-loan review process does not include project assistance to help improve the ESG performance of projects;
+* They rely on self-reported environmental impact reporting from borrowers, and have no formal procedure for field visits;
+* They lack mature information disclosure and complain systems;
+* CDB has no classification scheme for project environmental risk or a consultation mechanism with local stakeholders.[^ren2]
+
+[^ren2]: @ren, 32-35.
+
+The two banks align or supersede their international counterparts in other ways, including through stricter punishments for environmental violations and more segmented control of ESG risk management, but still have much room for improvement.[^ren3] The AIIB and NDB have both adopted standards on par with those of other MDBs, but they are so new that it is difficult to assess the actual environmental outcomes of their funding.[^gq5] Additionally, the SRF is nominally committed to sustainable development, but still has invested in oil, gas, petrochemical, and coal-fired power plant projects since 2015.[^words] The assets of these three institutions also only comprise one-tenth those of CDB and Exim.[^gq6]
+
+[^ren3]: @ren, 36-37.
+[^gq5]: @gq, 20.
+[^words]: @zhou, 16.
+[^gq6]: @gq, 21.
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# GREEN FINANCE MECHANISMS
+
+Institutions in China and abroad have developed a diverse array of financial mechanisms that have potential usefulness for improving the environmental outcomes of OFDI. Four categories of financial tools—bonds, credit, insurance, and ratings—are most applicable to cross-border capital flows. Others such as green funds, securitization, and trading schemes are less relevant for foreign investments. Policy innovations too can be valuable mechanisms of their own. It is crucial to develop institutional frameworks that allow financial institutions, investors, and firms to take advantage of green finance products and services. Effective public policies help to dispel real and perceived risks about new approaches to financing, and proper injections of government resources alter private behaviors for the public good.[^learned] Overall, Chinese green finance policy has grown more comprehensive since the 2012 *Guidelines*, but still focuses primarily on domestic markets and not on overseas investments.
+
+[^learned]: @buchner, 2.
+
+## Bonds
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 1: Green bonds have attractive financing schemes for infrastructure projects, increasingly follow rigorous disclosure standards, and are popular products in China and abroad.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Green bonds are debt issuances that generate proceeds for projects that have environmental benefits. This includes both new financing and refinancing for eligible projects. Green bonds cover the same categories as conventional bonds: use-of-proceeds corporate (issued by a firm); project (when investors have direct exposure to single or multiple projects); supranational (issued by an MDB); and financial (for bank lending toward green activities), among others.[^bonds] They offer favorable long-term asset-liability matching for institutional investors, low risk, comparable yields to conventional bonds, and portfolio diversification.[^brazil] In particular, green bonds suit low-carbon infrastructure and renewable energy projects because they often offer a lower cost of capital than traditional loan financing. This can dramatically reduce the levelized cost of capital for long-term projects and also help to “recycle” early-phase capital once projects are operational.[^oecd]
+
+[^bonds]: @oecd, 12.
+[^brazil]: @kaminker, 43.
+[^oecd]: @oecd, 3-4.
+
+In order to guarantee the “greenness” of a bond, issuers must go through a process of external certification or verification that assures the proceeds will finance activities with environmental benefits. This can involve second-opinion review, or working with an external advisor to assess and revise the bond’s framework; verification by auditing firms against reference criteria; certification by an accredited institution (e.g., Climate Bonds Standard); or rating by an agency or consulting firm.[^brazil2] Overall, green bonds are an effective way to achieve and demonstrate ESG commitments and improve risk assessments through rigorous reporting standards. They are also highly in demand, with an average oversubscription of 3.2 for dollar-denominated issuances.[^hu] However, challenges include differing definitions of “green,” transaction costs of verification and monitoring, lack of enforceability, and potential illiquidity.[^oecd2]
+
+[^brazil2]: @kaminker, 49.
+[^hu]: @hu_2017 
+[^oecd2]: @oecd, 11.
+
+China has the world’s fastest-growing green bond market. In July 2015, Xinjiang Goldwind Science and Technology issued China’s first green bond of \$300 million, a general-purpose rather than a use-of-proceeds instrument without any external certification or additional reporting.[^cbi2] Today, with Chinese green bond issuances surpassing $40 billion in 2018, certification and disclosure standards have improved in step. For international issuances, Chinese issuers follow the International Capital Market Association’s Green Bond Principles. The four Chinese green bonds issued abroad in 2017 also received certification from the Climate Bonds Initiative (CBI).[^gq7] There are at least seven instances of Chinese banks issuing green bonds abroad to fund OFDI projects, all of which received CBI certification or third-party rating and verification. The tenors ranged from two to seven years and funded projects such as wind power in Britain and energy and transportation along the BRI. There is only one example of an institution (the NDB) issuing an RMB-denominated bond in China for overseas projects, in this case renewable energy projects in China, Brazil, and Russia.[^ndb]
+
+[^cbi2]: @kidney; That is, Goldwind labeled it “green” because Goldwind is a renewable-energy company.
+[^gq7]: @gq, 24.
+[^ndb]: @ndb 
+
+An outstanding challenge is that Chinese standards for “green” diverge from each other and international benchmarks in important dimensions. The PBOC’s standard includes clean coal and fuel (gasoline and diesel) production, which would be incompatible with CBI’s taxonomy.[^dai] The NDRC’s own standard is mostly aligned with the PBOC’s but also includes nuclear power, which only a few international taxonomies include.[^kahl] Because of differing standards or less rigorous verification, over a third of Chinese green bonds issued in 2016 would not have met international criteria for green.[^gq8] This discrepancy could be a barrier for attracting international interest in Chinese green bonds for overseas projects. It could also attract international criticism if Chinese financial firms issued green bonds for OFDI in sectors perceived to be “dirty.”
+
+[^dai]: @dai, 23; @cbi, 5.
+[^kahl]: @kahlenborn, 47.
+[^gq8]: @gq, 25.
+
+## Credit
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 2: Green credit includes a variety of financing mechanisms, particularly lending, that Chinese banks use to direct funds toward environmentally friendly projects.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Green credit refers to any bank financing that accounts for the environmental performance of a client’s activities. It can mean both directing funds toward environmentally friendly investments or withholding funds from deleterious ones. Examples of green lending by Chinese banks include anything from loans to large-scale renewable energy facilities, smart grid systems, and green building projects to financing for forest carbon sinks. Besides direct lending, other products include energy management contracting, where energy efficiency savings go toward loan repayments, and green equipment leasing, where revenues from the clean technology repays a bank’s up-front capital expenditure.[^pwc4] In China, green credit is synonymous with the CBRC’s 2012 *Green Credit Guidelines*, which aimed to link bank lending to the environmental and social outcomes of financed projects. Since then, green credit has been the core of Chinese green finance ecosystem, accounting for over $1 trillion in 2016 or around 9 percent of all major bank lending in 2016.[^pboc6] At the time, the nonperforming rate of green loans was 0.41 percent, more than four times lower than for all loans.[^stanway]
+
+[^pwc4]: @pwc, 39-40.
+[^pboc6]: @pboc_unep, 17.
+[^stanway]: @stanway 
+
+*The current* Guidelines *already refer to overseas investment but are not an effective tool.*
+
+Article 21 of the *Guidelines* states that banks “shall strengthen the environmental and social risk management for overseas projects to which credit will be granted” and ensure that clients comply with local environmental laws and international practices.[^gobgg] In practice, however, there is insufficient evidence to determine whether Chinese banks do in fact condition their financing on the environmental performance of overseas projects. Issues include Chinese banks’ weak external communication channels, a lack of transparency around project lending (e.g., what specific environmental requirements contracts include), inadequate flexibility for project-specific due diligence requirements, and poor post-loan monitoring.[^foe] There is no system of rewards and punishments associated with green credit policies, even in the domestic context. CBIRC only requires that banks complete an annual self-evaluation of their green credit performance on 100 key performance indicators, only five of which relate to overseas investments. One of these is that banking staff conducting overseas financing have “sufficient knowledge” of host-country laws and regulations to appropriately judge the ESG risks involved, but this is likely not often achieved in practice.[^notice2] While the green credit activities of banks are held to a high standard within China, it is unclear to what extent the current guidelines drive positive environmental outcomes abroad.
+
+[^gobgg]: @foe, 32.
+[^foe]: @foe, 26-28.
+[^notice2]: @cbrc_notice 
+
+## Insurance
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 3: Insurance schemes tied to pollution, environmental, and political risks can internalize costs of overseas firms in sensitive industries.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Green insurance includes two categories of financial instruments. The first is insurance that allows for premium differentiation based on environmental risks or other characteristics. The second is specifically directed toward clean or low-carbon technologies.[^ifc1] In terms of large-scale Chinese overseas investments in sensitive industries, the first category, typically pollution liability insurance and natural disaster insurance, is most relevant. This kind of insurance can help mitigate overall project risk by reducing future expenditures and providing contingent resources for unlikely disasters, whether natural or man-made (including climate-related ones).[^biofin1] Compulsory insurance for certain high-risk sectors can also be an effective mechanism to internalize the costs of negative environmental externalities. German law requires compulsory environmental insurance for ninety-six industrial sectors, and British insurers have launched services to cover the cost of cleanup, penalties, damages, and medical costs stemming from a pollution incident.[^pboc7] Furthermore, the more expensive the insurance is, the less incentive firms and investors have to engage in high-risk projects.
+
+[^ifc1]: @ifc, 36.
+[^biofin1]: @biofin 
+[^pboc7]: @pboc_unep, 10.
+
+In mid-2018, MEE approved draft measures on compulsory environmental pollution insurance for firms operating within China. The insurance will be necessary for high-risk enterprises in oil and gas, chemical manufacturing, mining, hazardous wastes, and metals processing, among other sectors. It will cover injury, property damage, ecological damage, and emergency disposal and remediation costs, and have a standardized rate scheme based on the firm’s risk level.[^jrj] Such a wide-reaching system poses immense challenges for proper pricing, risk assessment, and implementation. But developing domestic experience could help inform insurance products for overseas projects, which in some regions and sectors face even greater environmental risks than projects within China. Sinosure, an SOE that Exim spun off in 2001 to become China’s major provider of export credit insurance, offers overseas investment insurance for political and economic risks but not for environmental ones.[^sinosure1]
+
+[^jrj]: @jrj 
+[^sinosure1]: @sinosure 
+
+## Ratings
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 4: Ratings and other schemes to internalize the cost of environmental risks can incentivize better business practices.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Green ratings function by disclosing information about the environmental implications of a firm’s activities or a specific project. In theory, greater transparency about the environmental risks associated with sensitive industries will drive capital toward more sustainable ones. Internationally, rating agencies such as MSCI and RobecoSAM score thousands of companies based on exposure to ESG risks, ability to manage them, or overall ESG business practices.[^roadmap] Other major credit rating agencies including Moody’s and S&P Global Ratings have pledged to incorporate ESG factors into their assessments of creditworthiness, and Barclays has an environmental and social risk evaluation system that works closely with the bank’s internal ratings division.[^statement] Comprehensive due diligence can also be financially valuable for firms, since superior sustainability performance is associated with positive stock market and accounting measures and cheaper equity financing.[^dev]
+
+[^roadmap]: @unep, 35.
+[^statement]: @unpri; @pboc_unep, 12.
+[^dev]: @johnson, 35.
+
+Within China, green ratings are challenging because rating agencies lack public environmental data and firms lack the necessary technology and experience to assess and manage environmental risks.[^est1] Additionally, investors and analysts have long criticized China’s domestic ratings industry for overly positive assessments.[^sp] In late 2018 CBRC even partially shut down Dagong Global Credit Rating Co., one of three Chinese agencies publicly committed to incorporating ESG factors in line with international standards, because of a lack of independence.[^rare] Rating companies based on overseas environmental performance and risks could have immense value for increasing operational transparency but requires more capacity than presently exists.
+
+[^est1]: @iigf_2017, 25.
+[^sp]: @zhu_2019 
+[^rare]: @galbraith, listed in @unpri.
+
+## Policies
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 5: Policies and international investment agreements that mobilize public resources behind green finance objectives create public value.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Government resources and policy signals can provide risk-averse firms and financial institutions with the confidence to invest in green finance.[^pwc5] Examples of real and financial support mechanisms from the United States and Europe include discounted interest rates and guarantees for green loans, feed-in tariffs (long-term price guarantees) for renewable energy, government procurement, and green bond tax exemptions.[^b] Public-private partnerships (PPPs), which the Chinese government has deployed for green infrastructure, pollution control, and energy efficiency projects, are another method of mobilizing government capital toward environmental objectives.[^est2] Since 1980, lenders in the United States have been held financially liable for the pollution and remediation costs that their clients incur, even retroactively in severe circumstances. Regulations in China that define the environmental responsibilities of financial firms do not yet exist and no Chinese bank has been held liable for the environmental impacts of their clients.[^b2] All of these policy measures that facilitate green finance objectives focus on domestic industries, but similar arrangements could apply to overseas investments. Chinese regulators could devise preferential policies for green finance used abroad, or integrate similar objectives into bilateral investment treaties. The Japan-Mexico Economic Partnership Agreement, for example, contains an article on promoting climate-conscious and sustainable investment, and Brazil embeds clauses on CSR mandates in its investment treaties.[^johnson4]
+
+[^pwc5]: @pwc, 22.
+[^b]: @ecgfs_b, 5-7.
+[^est2]: @iigf_2017, 20.
+[^b2]: @ecgfs_b, 8.
+[^johnson4]: @johnson, 29-30.
+
+Currently, besides Article 21 of the *Green Credit Guidelines*, most official Chinese publications make only brief reference to green finance and overseas investments. The most significant exception is the 2017 *Environmental Risk Management Initiative for China’s Overseas Investment*. It specifically recommends that investors to use green finance tools described above, implement environmental liability insurance, improve ESG disclosure, and engage third parties to build capacity for better risk assessment.[^risk2] The 2016 *Guidelines for Establishing the Green Financial System*, issued by the PBOC and other high-level bodies, also encourages financial institutions, firms, and development banks to improve risk management and information disclosure, use green bonds, and explore other instruments such as pollution liability insurance for overseas investments.[^seven] The MEP’s 2017 *Belt and Road Ecological and Environmental Cooperation Plan* also mentions ambitions to identify opportunities for green financing, environmental risk management, green bonds, and pollution insurance along the BRI.[^bri2] These documents lay out important goals for future development, but may not translate to real action without additional institutional and economic incentives.
+
+[^risk2]: @gfc, 4-5.
+[^seven]: @pboc_2016 
+[^bri2]: @mep 
+
+## Other Tools
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item Funds, banks, and other green finance mechanisms have limited or indirect usefulness for overseas investments.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+Other green finance tools have more limited or indirect usefulness for overseas investments. Green funds, for example, could in theory be a mechanism to channel capital toward environmentally friendly projects abroad. A number of banks, including Citigroup, Bank of America, and J. P. Morgan, have had dedicated funds for renewables, biodiversity conservation, and small- and medium-sized emerging market firms in environmental industries.[^ifc2] In China, the Ministry of Finance oversees a Clean Development Mechanism Fund that has invested in over two hundred green and low-carbon projects. And in 2016, there were 265 green funds registered with the Asset Management Association of China. These entities, in addition to specialized teams at banks, can develop expertise in assessing and valuing investment opportunities that deliver returns and environmental benefits. However, there is a lack of government incentives for funds and little high-level regulation of them.[^iigf] Their small size also makes them unfit for funding the large-scale infrastructure overseas with the most significant environmental impacts. Green banks, or entire institutions focused on this type of financing, could solve this problem but their high startup costs and steep learning curves would be significant hindrances. It is more feasible to consider reforming and improving the practices of existing institutions such as SRF, AIIB, CDB, and Exim.
+
+[^ifc2]: @ifc, 25; @pboc_unep, 9.
+[^iigf]: @iigf_2017, 20.
+
+\pagebreak
+
+Other tools have more circumscribed usefulness. Institutional investing and equity funds, for example, provide secondary demand for green assets such as green bonds and clean-energy firm stocks. They may capitalize on and popularize green assets, but they do not directly improve the environmental performance of enterprises operating overseas. Asset securitization could also be a feasible method for financing green infrastructure, renewable energy, ecosystem services, or forestry projects abroad.[^forest] But it is unlikely that overseas infrastructure loans, power-purchase agreements, or natural resources would provide a substantially large pool of predictable cash flows to securitize. Additionally, experience with green securitization within China is limited, with CDB issuing its first securitized green credit in late 2018.[^sec] Renewables “yieldcos,” which generate steady revenue streams based on contracted assets, are also unlikely to have enough international assets to be immediately feasible. Wind-power or weather derivatives might help certain Chinese firms constructing overseas wind farms hedge against poor conditions, but they are such specific tools that they have little applicability to other sectors. Finally, incorporating firms’ overseas carbon emissions into China’s domestic trading scheme could certainly reduce climate footprints, but doing so is too premature at this point in time. Many other types of green finance tools exist such as debt-for-nature swaps, commercial green banking, and more than sixty for biodiversity alone, according to the UN’s Biodiversity Finance Initiative, but most of these have little relevance for shifting the incentives of Chinese firms investing abroad.[^biofin2]
+
+[^forest]: @forest, 72; @oecd_2015; @ifc, 28-9.
+[^sec]: @xinhua 
+[^biofin2]: @biofin 
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# RECOMMENDATIONS
+
+The preceding sections identified eighteen issues related to the environmental dimensions of Chinese OFDI and five green finance mechanisms with potential to address them.[^note_appendix] The issues range from highly specific environmental problems (9 and 10) to policy weaknesses (12–15) and perceptual concerns (1, 7, 8). They involve a diverse array of actors, including Chinese ministries, regulators, financial institutions, and MNCs, international standards-setters, and host-country citizens. Due to the interrelatedness of issues and complexity of relationships, recommending one single tool or policy to “correct” any single problem would be unrealistic. Rather, only a combination of tools and policies applied to address the most critical factors might manage to shift the status quo.
+
+[^note_appendix]: Refer to the Appendix for a complete numbered list of the issues and mechanisms.
+
+My recommendations build upon the five mechanisms to address some the issues identified above. I assess each recommendation along four criteria as described in the Methodology section and review some limitations of green finance. The Appendix contains a list of five alternative recommendations that do not presently satisfy all the criteria but may have future usefulness.
+
+## 1. BRI Green Bonds and Credit
+
+\begin{minipage}[t]{.8\linewidth}
+ \textcolor{green}{\textbf{MOFCOM, CBIRC, and CSRC spearhead a BRI green bonds and credit initiative.}}
+\end{minipage}
+
+Common projections of the total cost of the BRI are $1 trillion and above, and official political support for the BRI stems from the highest levels of the Chinese government.[^big] At the same time, however, the current guiding principles for BRI financing do not mention green finance.[^guide1] As the key institutions governing financial institutions and overseas investment, CBIRC and MOFCOM can combine expertise to satisfy this need. Together they should devise favorable policies for overseas green credit (including fiscal assistance) and ensure that firms investing abroad have access to necessary financing for environmentally responsible projects. CSRC can also accelerate the approval process for green corporate bond issuances for BRI-related projects. CDB and Exim should be direct strategic partners in this process as well. CDB in particular has a green framework for bonds and credit that already aligns with international ones (such as CBI’s) by excluding coal, fossil fuel, and nuclear projects.[^cdb2] It has also already issued Moody’s A1-rated green bonds certified by CBI and Ernst & Young for BRI projects.[^gq9] This recommendation would put real financial incentives in place to funds toward projects with proven environmental benefits.
+
+[^big]: @hillman 
+[^guide1]: @mof 
+[^cdb2]: @cdb, 5.
+[^gq9]: @gq, 25.
+
+\pagebreak
+
+* **Efficiency**: The initiative could reduce the cost of capital for projects in environmentally friendly sectors, including low-carbon development and renewables (4, 5); mandate firm practices that are elective in other contexts (12) that could reduce local emissions (9); and boost transparency (15, 17), among other benefits. Costs would primarily be institutional, since MOFCOM and the two regulators would have to coordinate with each other and potentially the Steering Group for the BRI.[^note5] Financial costs, namely subsidies for green credit or bond issuances, would be minimal relative to the environmental returns from successful green investments.
+* **Feasibility**: Given the high-level political support for both green finance and the BRI, it is likely that Chinese leaders would welcome an initiative that combined the two. Additionally, a measure to “green” the BRI would help domestic stakeholders rebut critics who claim that the initiative is exporting pollution or exacerbating climate change. One potential source of pushback could be the PBOC (and the subsidiary State Administration of Foreign Exchange), which might view the preferential financing policies as facilitating capital outflow, directly contravening its conservative capital control policies of 2018.[^constrict]
+* **Expedience**: Because domestic infrastructure for green bonds and credit is already established, it should require little innovation to apply preferential policies to overseas projects. The broad political support would also help to expedite the initiative.
+* **Sustainability**: The initiative should continue as long as funding for subsidies is available and the political will to support BRI exists. In the future it could even be expanded into a compulsory scheme, with some portion of all debt financing for BRI projects required to be verifiably green.
+
+[^note5]: 推进“一带一路”建设工作领导小组 
+[^constrict]: @shen 
+
+## 2. Overseas Pollution Liability Insurance
+
+\begin{minipage}[t]{.8\linewidth}
+ \textcolor{green}{\textbf{CBIRC launches a pilot project for mandatory overseas pollution liability insurance for sensitive industries.}}
+\end{minipage}
+
+As suggested in the 2017 *Environmental Risk Management Initiative* and 2016 *Guidelines*, pollution liability insurance could be an important tool for influencing firm behavior overseas. Just as with the domestic pilot program, CBIRC could link mandatory insurance to certain bank financing (e.g., CDB and Exim) or specific higher-risk sectors such as extractives and manufacturing. The scheme would use best practices from the domestic program and price policies based on project risk. The goal of the pilot would be to assess whether insurance effectively increased the costs of sensitive projects and whether it was able to compensate for damages in a satisfactory manner. Ideally, the program would reduce firm risk-taking (by holding companies liable for irresponsible conduct), increase the outlay cost for sensitive projects, and facilitate risk-sharing for damages compensation.
+
+\pagebreak
+
+* **Efficiency**: The project could serve as a market mechanism to direct capital away from sensitive industries (4, 10); compensate local communities in host countries with weak environmental protection (6); disincentivize polluting activities (9); and require compliance (12) with the threat of penalties for improper conduct (13). The private insurance sector would bear the major costs for the project, as with domestic liability insurance.[^insure] Insurers would need to have the necessary legal backing, clear standards for indemnities, and an adequately sized risk pool for the scheme to be viable. The central government might also need to provide subsidies, tax exemptions, or guarantees to incentivize private insurers to participate in the pilot.
+* **Feasibility**: Pollution liability insurance essentially forces firms to internalize the cost of potential damages from their operations. Thus, firms might initially resist the pilot because of the added cost of overseas investment. Private insurers too could be reluctant to participate without proper compensation or policy support. The challenge of a pilot would be to identify a certain subset of firms (e.g., operating in a specific country) to involve at the outset.
+* **Expedience**: The domestic mandatory pollution liability insurance law would directly inform the overseas pilot project. For example, the pilot could define the same eight sensitive sectors, specify the same scope, and require the same level of risk assessment as specified in the law.[^draft] This would require little innovation and accelerate the launch of the pilot.
+* **Sustainability**: Over the long run, pollution liability insurance should be profit-making for insurers. It could also level the playing field for firms that are all subject to the same requirement, rather than varying conditions based on host-country rules and regulations.[^note6] As with any pilot project, early successes and failures would inform how CBIRC expands or modifies the scheme in the future.
+
+[^insure]: @ecgfs_insurance, 4.
+[^draft]: @luziku 
+[^note6]: For example, a mining company operating in a country with weak environmental standards could be at a competitive advantage compared to one operating in a country with stronger standards. 
+
+## 3. Conditional Overseas Investment Insurance
+
+\textcolor{green}{\textbf{Sinosure conditions its support on environmental due diligence.}}
+
+In the United States, OPIC conditions its political risk insurance and other support on a project’s “Development Matrix” score, which assesses environmental and social performance.[^opic] In a similar fashion, Sinosure could condition its overseas investment insurance, which protects investors against political and economic risks, on a firm’s fulfilling certain environmental and social benchmarks.[^sinosure2] This would also be an advantageous selection factor for Sinosure’s risk pool, since firms willing to comply might be less risk-prone or more transparent in other dimensions of corporate activity. Sinosure could also increase premiums for certain industries with high environmental risks, since they may be more likely to encounter resistance from local governments or communities that threatens project viability. To develop this scheme, Sinosure could leverage the expertise of interested stakeholders such as the Insurance Asset Management Association of China, which co-published the 2017 *Environmental Risk Management Initiative*.
+
+[^opic]: @opic, 33.
+[^sinosure2]: @sinosure
+
+* **Efficiency**: Sinosure’s policy could address a range of issues for firms in sensitive industries that purchase overseas investment insurance. It could increase the cost of investing in weakly governed states and environmentally sensitive sectors (3, 4)[^note7]; incentivize civil engagement through combined environmental and social due diligence (7, 8); and mandate project transparency (15, 17). Direct costs would be institutional, for Sinosure to adapt its assessment procedures, and financial, for firms to pay an added cost for third-party environmental verification. The added cost for firms might also cause Sinosure to lose some revenue if firms chose to forego insurance. But since demand for Sinosure’s overseas investment insurance is higher than ever (at nearly $60 billion in 2018), there is no better time for a change in policy.[^sinosure3]
+* **Feasibility**: Sinosure might resist change because of the institutional cost and potential revenue loss. However, Sinosure has a greater vested interest in improving the risk management practices of overseas enterprises.[^sasac] It is also a prominent SOE whose priorities likely derive from the policy goals of the country’s top leadership. Its internal Communist Party branch is also on the “front line” of business development at the company.[^party] So if party leaders are concerned with “greening” outbound investment associated with the BRI, for example, they could use this channel to compel Sinosure to adopt new practices.
+* **Expedience**: Changing the practices of one corporation, even a large one like Sinosure, likely delivers quicker results than coordinating the policies of multiple stakeholders. One limiting factor in this case is the availability of third-party verifiers: a lack of firms with the proper capacity to vet the environmental risks of overseas projects relative to the demand for due diligence would constrict Sinosure’s sales. This suggests that a small pilot scheme would be a prudent first step.
+* **Sustainability**: If an initial attempt successfully improves environmental outcomes for insured firms and proves to reduce corporate risk-taking in other dimensions, the scheme would be a valuable addition to Sinosure’s insurance practice. The costs of due diligence, and thus Sinosure’s product, will only decrease over time as the market for third-party verification grows.
+
+[^note7]: E.g., if a mining firm, fearing expropriation, wants to purchase political risk insurance to invest in a weakly governed country at a cost of $X$, it would now have to perform environmental and social due diligence with an added cost $C$. This might make the firm indifferent to investing in another country at a cost $Y$, which has stronger governance but is a more expensive investment destination, and not purchasing insurance or conducting due diligence. (In other words, $X + C = Y$.) 
+[^sinosure3]: @xinhua_sinosure 
+[^sasac]: @sasac_2018 
+[^party]: @sinosure_party 
+
+\pagebreak
+
+## 4. Green Ratings for Multinationals
+
+\textcolor{green}{\textbf{PBOC promotes green ratings for Chinese multinationals.}}
+
+The PBOC aims to improve the quality and rigor of domestic credit assessments. To accomplish this, it has increasingly allowed international rating agencies into China, with S&P Global, Moody’s, and Fitch all making moves to increase their presence in early 2019.[^house] All three have developed robust systems for assessing environmental, social, and governance (ESG) risks or integrating them into their credit ratings.[^wilkins] Other firms, such as MSCI, have long-established ESG rating practices that cover some Chinese multinationals.[^msci] By promoting the inclusion of environmental factors in ratings, the PBOC would increase the availability of environmental information available to financial institutions and consumers and hold firms accountable for their environmental performance. The greater transparency about firm behavior would work to discourage environmentally risky overseas investments and activities through market pressures.
+
+[^house]: @chen_2019; @tu 
+[^wilkins]: @wilkins; @moodys; @fitch 
+[^msci]: @msci 
+
+* **Efficiency**: Green ratings could increase the implicit cost of environmentally risky business activities (4, 9, 10); use creditworthiness as an enforcement mechanism for environmental performance (13); create a culture of transparency (15, 17); and bring Chinese financial markets in line with international standards (18). As an added benefit, improving the rigor of domestic ratings could also attract foreign capital into China. Some transaction costs would be borne by firms, which would need to compile and publicize previously unreported environmental-related data. Overall, however, information disclosure is a relatively cost-effective way to improve market efficiency.
+* **Feasibility**: Domestic rating firms, which some already criticize as weak, would lose market share to more established foreign competitors if they did not improve their practices. Both domestic firms and multinationals might also resist the increased scrutiny on environmental performance. But neither group holds enough concerted power to resist a PBOC-directed ratings market liberalization, especially if financial markets demand greater transparency.
+* **Expedience**: Developing comprehensive environmental ratings for Chinese multinationals could take many years. Agencies must first build capacity to assess the domestic environmental performance of firms, and eventually incorporate overseas activities as corporate transparency improves over time. This extended time horizon is a weaker point of this recommendation, but it is process better begun sooner rather than later.
+* **Sustainability**: Over time, ratings based on environmental performance would improve the reliability of China’s financial markets through increased transparency and reduce environmental risk-taking at home and abroad. Focusing on green ratings first could lay a foundation for incorporating social and governance factors as well, which often are more subject to interpretation but equally useful.
+
+## 5. Mandatory Disclosure for Listed Companies
+
+\begin{minipage}[t]{.8\linewidth}
+ \textcolor{green}{\textbf{CSRC and the Shanghai and Shenzhen Stock Exchanges mandate environmental information and CSR disclosures.}}
+\end{minipage}
+
+Both the Shanghai Stock Exchange (SSE) and Shenzhen Stock Exchange (SZSE) have social responsibility guidelines that are more than a decade old.[^sse] The SSE requires companies to disclose major environmental events (e.g., violations), and both make annual CSR publications optional.[^sse2] In 2017 the CSRC and MEP launched an initiative to require environmental information disclosure for listed companies, but further details about it are sparse.[^sparse] In 2017 fewer than 30 percent of firms on the two exchanges chose to disclose environmental information, and the quality of the disclosure was uneven.[^uneven] It is also unlikely that any detailed the environmental impacts of overseas operations. Banks too rarely report any information relating to the CSR dimensions of their overseas financing. To ameliorate this, CSRC should require that listed companies disclose environmental information, including about overseas operations. The SSE and SZSE should also update their CSR filing guidelines with the expectation that firms will include any environmental protection work conducted overseas. This would require, or at the very least incentivize, China’s largest multinationals, state-owned commercial banks, and private commercial banks to disclose information about their environmental performance abroad that is not currently public. It could generate stakeholder and investor pressure for firms to avoid environmentally risky investments and to engage in community-minded CSR activities overseas.
+
+[^sse]: @sse; @szse_2006 
+[^sse2]: See 3 in @sse and 10.14 in @szse_2006.
+[^sparse]: @csrc 
+[^uneven]: @zhang 
+
+* **Efficiency**: Mandatory overseas environmental information and CSR disclosure could shift capital away from polluting or carbon-intensive industries (4, 5, 9, 10); incentivize environmental CSR activities that benefit host-country communities (7, 8); and demand transparency (15, 17) that keeps risk-taking in check (13). An additional benefit is the improved quality of corporate information available to shareholders. While some firms might resist the new requirements, voluntary delisting for large firms would be unlikely. Additionally, limited research suggests that certain kinds of firms actually increase their creditworthiness through environmental disclosure.[^performance] Most importantly, the SSE and SZSE have the infrastructure for disclosure already in place. Listed firms just have to be required to use it.
+* **Feasibility**: As the only two stock exchanges in Mainland China, the SSE and SZSE have complete power to shift environmental disclosure requirements. But different kinds of firms may have different capacities to gather and report the necessary information, so some may resist such a significant shift in regulation.
+* **Expedience**: Bringing all listed companies into compliance would likely be a multiyear process. Because of varying capacities between firms, CSRC would likely need to implement a grace period or make allowances for firms that could not meet immediate disclosure requirements. Alternatively, the exchanges could mandate basic information disclosure in the short term and gradually increase expectations in the long term.
+* **Sustainability**: Over time, the quality and quantity of environmental disclosure and CSR information should increase. The first step is mandating some release, and setting the expectation that overseas environmental performance is an integral part of overall environmental performance.
+
+[^performance]: @hu_2018 
+
+## Limitations of Green Finance
+
+Green finance mechanisms and policies cannot address some of the 18 issues identified above. For example, they cannot directly increase firm experience (2), which only comes with time, or boost host-country capacity for environmental protection (6). While external observers of Chinese investment may perceive projects funded through green finance as more environmentally friendly, the tools themselves cannot shift these perceptions directly (1). When pollution or environmental accidents harm a local community, a well-intentioned financing structure does little to quell ripple effects through host-country media (11). And finally, green finance has limited capacity to transform the nature of a national foreign policy such as the BRI (16). If one believes that the BRI in essence is an environmentally deleterious endeavor—destroying biodiversity hotspots, for example—then it would be a challenge to believe that financing mechanisms would counter that. Furthermore, the green finance tools prescribed above use markets to promote the environmental co-benefits of economic activity, and thus function only as well as the underlying markets themselves. Information asymmetry, imperfect competition, and transaction costs can all derail the best-designed interventions. For this reason, green finance can supplement stringent environmental regulations but cannot replace them altogether. Finally, cross-border economic activity has important social implications that often supersede environmental concerns. It is important to treat green finance as a starting point for sustainable finance, which promotes a more holistic concept of human well-being.
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# REFERENCES
+
+<div id="refs"></div>
+
+\begin{center}
+\textcolor{green}{\rule{.5\textwidth}{1pt}}
+\end{center}
+
+\pagebreak
+
+# APPENDIX
+
+## Notes
+
+All page numbers cited in this report refer to PDF pages. All formatting created with R Markdown and \LaTeX. Find the code for the original paper on \textcolor{green}{\textbf{\href{https://github.com/gbwalker/green_finance}{GitHub}}}.
+
+
+In addition to input from Mathias Lund Larsen (International Institute of Green Finance), Anthony Saich (Harvard Kennedy School), and Dara Kay Cohen (Harvard Kennedy School), I met with the following individuals while writing this report:
+
+* Cui Ying (International Institute of Green Finance)
+* Kelly Sims Gallagher (Tufts University)
+* Hu Tao (World Wildlife Fund)
+* Ren Peng (Global Environment Institute)
+* Daniel Schrag (Harvard University)
+* Qi Qi (Tufts University)
+
+## Case Studies
+
+The following ten case studies served as the basis for host-country issue identification:
+
+* `r capture.output(print(bib["dunn"]))` 
+* `r capture.output(print(bib["foe"]))` 
+* `r capture.output(print(bib["hw"]))` 
+* `r capture.output(print(bib["cpec"]))` 
+* `r capture.output(print(bib["marsh"]))` 
+* `r capture.output(print(bib["ren"]))` 
+* `r capture.output(print(bib["shinn"]))` 
+* `r capture.output(print(bib["wz"]))` 
+* `r capture.output(print(bib["zhu"]))` 
+* `r capture.output(print(bib["zhu_2016"]))` 
+
+\pagebreak
+
+## Alternative Recommendations
+
+For each of the five alternatives I describe one valuable dimension of the outcome and name one criterion the outcome does not satisfy.
+
+\begin{minipage}[t]{.9\linewidth}
+\textcolor{green}{\textbf{CBIRC requires major banks to have internal environmental risk (or ESG) units.}}
+\end{minipage}
+
+* If financial institutions better assessed, quantified, and internalized the costs of risky projects, financing would be cheaper for environmentally friendly overseas projects.
+* **Efficiency**: Empowering new units within large institutions is difficult from a regulatory perspective and cost-intensive from the banks’ perspective. The units might also be ineffective without a greater culture of corporate transparency and more rigorous environmental disclosure requirements.
+
+\begin{minipage}[t]{.9\linewidth}
+\textcolor{green}{\textbf{CBIRC holds banks financially accountable for client-caused environmental damages.}}
+\end{minipage}
+
+* If financial institutions were responsible for the environmental performance of their clients, the cost of capital for sensitive industries would likely increase.
+* **Feasibility**: Banks would likely resist this new policy. And if CBIRC managed to impose it, the more cautious ones might restrict investment to sensitive industries with serious economic consequences to those sectors.
+
+\begin{minipage}[t]{.9\linewidth}
+\textcolor{green}{\textbf{NDRC includes Chinese multinationals' carbon emissions in the emerging domestic carbon market.}}
+\end{minipage}
+
+* Incorporating international carbon emissions would ensure that firms and banks do not “export” carbon-intensive activities such as coal-fired power plants while pursuing low-carbon development at home.
+* **Expedience**: The domestic carbon market in China is not yet operational or proven to work outside of pilot schemes. Developing the capabilities to report overseas emissions accurately would also take years of work.
+
+\begin{minipage}[t]{.9\linewidth}
+\textcolor{green}{\textbf{MOFCOM's Department of Outward Investment and Economic Cooperation promotes green PPPs with host-country governments.}}
+\end{minipage}
+
+* Encouraging Chinese firms to work closely with host-country governments to fund and develop environmentally responsible projects could better align corporate and local community interests.
+* **Sustainability**: This approach could create valuable one-off projects, but it is not a structural reform that catalyzes long-term shifts in firm behavior.
+
+\begin{minipage}[t]{.9\linewidth}
+\textcolor{green}{\textbf{MOFCOM promotes green funds specifically for overseas investment.}}
+\end{minipage}
+
+* Green funds would have specialized capacity to vet and finance projects abroad that met environmental criteria beyond those required by the host country.
+* **Efficiency**: Green funds could finance some smaller-scale projects but could never achieve the financing power of CDB and Exim.
+
+## Additional Chinese Policies
+
+\textcolor{green}{\textbf{Government-wide Policies}}
+
+Over the past two years, government entities published five relevant high-level policies:
+
+* The 2018 ***Interim Measures for Reporting of Outbound Investments Subject to Record-Filing or Approval*** (MOFCOM, PBOC, SASAC, and four other entities) stresses information centralization, joint violation response, encouraged and negative investment lists, random inspections, and regular reporting and supervision. Although it does not mention environmental issues explicitly, any serious incidents that a firm were involved in overseas would likely be subject to warnings or reminders of some sort.[^interim1] Legal action is reserved for tax evasion, prohibited procurement of foreign exchange, and other illegal behaviors.[^ill]
+* The 2017 ***Administrative Measures for Enterprise Outbound Investment*** (NDRC) lays out detailed filing procedures for OFDI and emphasizes information reporting and project supervision. It also directs firms to “fulfill necessary social responsibilities, pay attention to environmental protection, and foster a positive image of Chinese investors.”[^qiye]
+* The 2017 ***Regulations on Outbound Investment and Business Activities of Private Enterprises*** (NDRC, MOFCOM, PBOC, MFA, and the National Federation of Industry and Commerce) requires private investors to follow the Chinese laws, laws of the host country, and international practices, and emphasizes performance management and project quality. It devotes an entire section to resources and environmental protection that instructs firms to carry out EIAs and due diligence, apply for necessary host-country environmental permits, prepare action plans for environmental accidents, conduct “clean production,” and undertake environmental remediation. A separate section that relates to fulfilling social responsibilities directs firms to respect local traditions and practices, strengthen “social communication” with trade unions, media, NGOs, and others, and improve CSR and sustainability disclosure.[^disclosure] 
+* The 2017 ***Measures for the Supervision and Administration of Overseas Investment of Central Enterprises*** (SASAC) emphasizes accountability, host-country legal compliance, prohibited investments (of which a list is yet unpublished), project reporting, risk reduction, and social responsibility for central SOEs, but does not explicitly reference environmental issues.[^central] Any such problem would likely be dealt with through the same channels that govern other irresponsible business practices overseas.
+* The 2017 ***Further Guidelines on the Monitoring and Supervision of Outbound Direct Investment*** (NDRC, MOFCOM, PBOC, and MFA), an addendum to a 2014 MOFCOM policy[^old] on filing and managing overseas investments, lays out “encouraged,” “restricted,” and “prohibited” categories for OFDI. According to the document, investments that use “backward” equipment or fail to meet the environmental or energy consumption standards of a country are restricted but not prohibited.[^prohibit] Firms need only to file, not seek approval, for such projects.
+
+[^interim1]: @mofcom_temp_2018 
+[^ill]: @mofcom_bri 
+[^qiye]: @ndrc 
+[^disclosure]: @mofcom_regs_2017 
+[^central]: @sasac 
+[^old]: Measures for the Administration of Overseas Investment, 商务部令2014年第3号《境外投资管理办法》.
+[^prohibit]: @ndrc_2017 
+
+Two earlier key policies also have important provisions:
+
+* The 2013 ***Guidelines for Environmental Protection in Foreign Investment and Cooperation*** (MOFCOM and MEP) encourages firms to conduct regular environmental protection, reduce environmental risks, maintain a positive image for Chinese companies, train employees in environmental protection, and support sustainable development in host countries. Similar to more recent provisions, it suggests that firms follow host-country laws and regulations and conduct EIAs and due diligence. It also contains more specific provisions on hazardous waste and pollution control, environmental accident preparation, and ecological restoration and stakeholder communication (according to host-country laws).[^guide2] Although the Guidelines are the most specific regulations governing the environmental dimensions of OFDI, they are ultimately nonbinding.
+* The 2013 ***Measures for Unfavorable Credit Records in the Fields of Outward Investment Cooperation and Foreign Trade*** (MOFCOM, MFA, and three others) states that “destroying the local ecology and environment” warrants a “bad credit” rating for firms, which becomes public, circulates to foreign embassies, or is retained for internal reference.[^bad] The document provides no information about the actual ramifications of have “bad credit.”
+
+[^guide2]: @mofcom_coop_2013 
+[^bad]: @mofcom_2013
+
+\textcolor{green}{\textbf{Topic-specific Policies}}
+
+Four 2017 publications refer specifically to the environmental dimensions of overseas investments and BRI:
+
+* The ***Environmental Risk Management Initiative for China’s Overseas Investment***, issued by the Green Finance Committee of the China Society for Finance and Banking, five financial associations, and an office at the MEP, encourages banks and firms to adopt responsible investment principles abroad. Specifically, it stresses that both should understand host-country laws and regulations, follow international standards, improve ESG information disclosure, improve risk management through third-party support, and adopt green finance instruments to improve environmental performance. The publishing institutions also commit to building capacity in these areas, such as offering training programs, developing risk management manuals, and launching a website for BRI environmental risk management.[^risk3] 
+* The ***Belt and Road Ecological and Environmental Cooperation Plan*** (MEP) states that “green development” and “eco-environmental protection” are components of BRI’s guiding ideology. It aims to promote cooperation in green sectors, apply green financial instruments to investments, encourage enterprises to play a “major role” in environmental governance, and advance low-carbon infrastructure, among other goals. The ***Guidance on Promoting Green Belt and Road*** (MEP) covers largely the same ground.[^gbri] ***Building the Belt and Road: Concept, Practice and China’s Contribution*** (Office of the Leading Group for the Belt and Road Initiative) mentions cooperation for ecological and environmental protection, including pollution prevention, water conservation, forest and wildlife protection, green investment, and climate change.[^climate] Overall the documents present ambitious slew of objectives that imagines BRI as an “eco-friendly” and “green” international project.
+
+[^risk3]: @gfc, 2-6.
+[^gbri]: @bri_guidance 
+[^climate]: @olgbri 
+
+\textcolor{green}{\textbf{Other Relevant Publications}}
+
+* The 2007 ***Guide on Sustainable Overseas Silviculture by Chinese Enterprises*** and 2009 ***Guidelines on Sustainable Operation and Utilization of Overseas Forests by Chinese Enterprises*** (State Forestry Administration and MOFCOM) provide information on regulations, sustainable forestry management, technical guidance, and ecological protection for firms involved in forestry operating abroad. One more recent manual provides detailed guidelines for firms working in Mozambique.[^moz] 
+* At least forty-three industry associations have published CSR guides for international businesses since 2006, such as the China Chamber of Commerce of Metals, Minerals, and Chemicals Importers and Exporters’ 2014 ***Guidelines for Social Responsibility in Outbound Mining Investments*** and the China Agricultural Association for International Exchange’s 2014 ***Pact for Good Operation and CSR Fulfilment in Overseas Agricultural Investment***.[^csr1]
+* For the past ten years MOFCOM has published an annual ***Foreign Investment Cooperation Country Guide*** with data and information about country-specific policies and regulations. The 2018 edition covers 172 countries or regions and has detailed infrastructure-related content for BRI countries.[^country]
+
+[^moz]: @sfa; @chen_2016 
+[^csr1]: @csr, 241-5.
+[^country]: @mofcom_region 
+
+\pagebreak
+
+## International Regimes
+
+International regimes that relate to environmentally responsible investment fall into four general categories:
+
+* **Standard-setters**: Institutions that establish treaties, convene influential meetings, or wield discursive power include the United Nations and UN Framework Convention for Climate Change, the World Bank and other MDBs, the International Finance Corporation (IFC), OECD, and International Organization for Standardization (ISO), among others.
+* **International initiatives and reporting frameworks**: Examples include the Equator Principles, an elective risk management framework for due diligence and monitoring; the UN’s Principles for Responsible Investing, a set of six voluntary ESG guidelines for investors, and Principles for Positive Impact Finance, an SDG-oriented framework for banks and investors; the Global Reporting Initiative, a sustainability reporting organization; and CDP, formerly the Carbon Disclosure Project, a self-reported environmental data initiative for firms and investors.[^int]
+* **Financial associations**: Examples include the IFC’s Sustainable Banking Network, a group of thirty-five developing-country financial regulators and institutions committed to advancing sustainable finance; the Global Sustainable Investment Alliance, a collective of international sustainable investment organizations; and the International Development Finance Club, a Paris Agreement–oriented convener committed to mobilizing finance for climate action.[^fin]
+* **Standards**: Examples include the IFC Performance Standards, eight ESG dimensions for investments; the Sustainability Accounting Standards Board’s Classification System, which covers seventy-seven industries; the Institute for Sustainable Infrastructure’s sixty-point project verification system; the ISO 14000 and 26000 standards for environmental management and social responsibility; the Frankfurt–Hohenheimer Guidelines for the ethical assessment of companies; and the Global Reporting Initiative’s Standards for sustainability reporting.[^std] Some standards (e.g., the IFC Standards or OPIC’s Development Matrix) are safeguards, or minimum necessary requirements for funding, while others are accounting schemes for assessment or guidelines for best practices. 
+
+[^int]: @eq_about; @unepfi_psi; @unepfi; @gri_about; @cdp
+[^fin]: @ifc_sbn; @gsia; @idfc, 4.
+[^std]: @ifc; @sasb; @ifc_2017, 22; @iso_14; @iso_26; @gri_standards; @fhg
+
+\pagebreak
+
+## List of Issues and Green Finance Mechanisms
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 1: Perception that Chinese firms export “dirty” development.
+   \item 2: Chinese firms lack experience operating overseas.
+   \item 3: Chinese firms invest without regard to governance.
+   \item 4: Chinese OFDI goes to environmentally sensitive sectors.
+   \item 5: Chinese OFDI goes toward high-carbon development and, excluding hydropower, lags behind in renewables.
+   \item 6: Chinese MNCs operate in host countries that have a limited ability or willingness to address environmental concerns.
+   \item 7: Chinese firms focus on government, not civil, engagement.
+   \item 8: The environmental performance of Chinese investments has a crucial social component.
+   \item 9: Extractive, hydropower, and infrastructure projects often have serious ecological consequences.
+   \item 10: Environmental issues cause ripple effects for host-country stakeholders that threaten future investments.
+   \item 11: Waste emissions that pollute local water and air are a frequently reported consequence of industrial activity.
+   \item 12: Environmental guidelines for OFDI are mostly elective and aspirational.
+   \item 13: OFDI policies lack enforcement mechanisms.
+   \item 14: OFDI policies do not match Chinese MNCs realistic capacity to follow them.
+   \item 15: OFDI policies emphasize information centralization, not transparency.
+   \item 16: BRI projects and other overseas investments may be incompatible with international treaties on biodiversity and climate change.
+   \item 17: Elective transparency initiatives for firms are uneven or ineffective for overseas operations.
+   \item 18: Chinese financial institutions subscribe to limited international benchmarks for ESG best practices, and CDB and Exim fall short of leading MDBs.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
+
+\begin{center}
+\fcolorbox{green}{white}{
+ \begin{minipage}[t]{.9\linewidth}
+  \begin{itemize}
+   \item 1: Green bonds have attractive financing schemes for infrastructure projects, increasingly follow rigorous disclosure standards, and are popular products in China and abroad.
+   \item 2: Green credit includes a variety of financing mechanisms, particularly lending, that Chinese banks use to direct funds toward environmentally friendly projects.
+   \item 3: Insurance schemes tied to pollution, environmental, and political risks can internalize costs of overseas firms in sensitive industries.
+   \item 4: Ratings and other schemes to internalize the cost of environmental risks can incentivize better business practices.
+   \item 5: Policies and international investment agreements that mobilize public resources behind green finance objectives create public value.
+  \end{itemize}
+ \end{minipage}
+}
+\end{center}
